@@ -4,26 +4,27 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/render"
+	"github.com/go-chi/chi/v5/middleware"
+	"github.com/henrique1501/email-N/internal/domain/campaing"
+	"github.com/henrique1501/email-N/internal/endpoints"
+	"github.com/henrique1501/email-N/internal/infra/database"
 )
 
 func main() {
 	r := chi.NewRouter()
+	r.Use(middleware.RequestID)
+	r.Use(middleware.RealIP)
+	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		param := r.URL.Query().Get("name")
-		w.Write([]byte(param))
-	})
-
-	r.Get("/{product}", func(w http.ResponseWriter, r *http.Request) {
-		param := chi.URLParam(r, "product")
-		w.Write([]byte("O nome do produto é: " + param))
-	})
-
-	r.Get("/json", func(w http.ResponseWriter, r *http.Request) {
-		obj := map[string]string{"message": "success"}
-		render.JSON(w, r, obj)
-	})
+	campaignService := campaing.Service{
+		Repo: &database.CampaignRepository{},
+	}
+	handler := endpoints.Handler{
+		CampaignService: campaignService,
+	}
+	r.Post("/campaigns", endpoints.HandlerError(handler.CampaignPost))
+	r.Get("/campaigns", endpoints.HandlerError(handler.CampaignGet))
 
 	http.ListenAndServe(":3333", r)
 }

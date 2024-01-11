@@ -20,6 +20,11 @@ func (r *repositoryMock) Save(campaing *Campaing) error {
 	return args.Error(0)
 }
 
+func (r *repositoryMock) Get() ([]Campaing, error) {
+
+	return nil, nil
+}
+
 var (
 	newCampaing = contracts.NewCampaingDTO{
 		Name:    "Test Y",
@@ -33,7 +38,7 @@ func Test_Create_Campaing(t *testing.T) {
 	assert := assert.New(t)
 	repository := new(repositoryMock)
 	repository.On("Save", mock.Anything).Return(nil)
-	service.repo = repository
+	service.Repo = repository
 
 	id, err := service.Create(newCampaing)
 
@@ -66,7 +71,7 @@ func Test_Save_CreateCampaing(t *testing.T) {
 
 		return true
 	})).Return(nil)
-	service.repo = repository
+	service.Repo = repository
 
 	service.Create(newCampaing)
 
@@ -77,7 +82,7 @@ func Test_Save_ValidateRepositorySave(t *testing.T) {
 	assert := assert.New(t)
 	repository := new(repositoryMock)
 	repository.On("Save", mock.Anything).Return(errors.New("error to save on database"))
-	service.repo = repository
+	service.Repo = repository
 
 	_, err := service.Create(newCampaing)
 

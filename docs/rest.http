@@ -1,0 +1,11 @@
+POST https://3333-henrique1501-emailn-5xduqw8ig2w.ws-us107.gitpod.io/campaigns
+
+{
+  "name": "cam",
+  "content": "campaign 03 description",
+  "emails": ["jhondoe@gmail.com", "henrique@gmail.com"]
+}
+
+###
+
+GET https://3333-henrique1501-emailn-5xduqw8ig2w.ws-us107.gitpod.io/campaigns
