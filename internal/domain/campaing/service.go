@@ -5,11 +5,15 @@ import (
 	internalerrors "github.com/henrique1501/email-N/internal/internalErrors"
 )
 
-type Service struct {
+type Service interface {
+	Create(newCampaing contracts.NewCampaingDTO) (string, error)
+}
+
+type ServiceImp struct {
 	Repo Repository
 }
 
-func (s *Service) Create(newCampaing contracts.NewCampaingDTO) (string, error) {
+func (s *ServiceImp) Create(newCampaing contracts.NewCampaingDTO) (string, error) {
 	campaing, err := NewCampaing(newCampaing.Name, newCampaing.Content, newCampaing.Emails)
 	if err != nil {
 		return "", err
