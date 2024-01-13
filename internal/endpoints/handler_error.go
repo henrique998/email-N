@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/render"
-	internalerrors "github.com/henrique1501/email-N/internal/internalErrors"
+	internalerrors "github.com/henrique998/email-N/internal/internalErrors"
 )
 
 type EndpointFunc func(w http.ResponseWriter, r *http.Request) (interface{}, int, error)

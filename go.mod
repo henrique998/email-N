@@ -1,4 +1,4 @@
-module github.com/henrique1501/email-N
+module github.com/henrique998/email-N
 
 go 1.21.5
 

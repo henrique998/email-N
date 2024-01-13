@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/render"
-	"github.com/henrique1501/email-N/internal/contracts"
+	"github.com/henrique998/email-N/internal/contracts"
 )
 
 func (h *Handler) CampaignPost(w http.ResponseWriter, r *http.Request) (interface{}, int, error) {

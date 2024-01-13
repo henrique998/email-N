@@ -1,4 +1,4 @@
-POST https://3333-henrique1501-emailn-5xduqw8ig2w.ws-us107.gitpod.io/campaigns
+POST https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns
 
 {
   "name": "cam",
@@ -8,4 +8,4 @@ POST https://3333-henrique1501-emailn-5xduqw8ig2w.ws-us107.gitpod.io/campaigns
 
 ###
 
-GET https://3333-henrique1501-emailn-5xduqw8ig2w.ws-us107.gitpod.io/campaigns
+GET https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns

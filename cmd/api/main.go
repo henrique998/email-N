@@ -5,9 +5,9 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/henrique1501/email-N/internal/domain/campaing"
-	"github.com/henrique1501/email-N/internal/endpoints"
-	"github.com/henrique1501/email-N/internal/infra/database"
+	"github.com/henrique998/email-N/internal/domain/campaing"
+	"github.com/henrique998/email-N/internal/endpoints"
+	"github.com/henrique998/email-N/internal/infra/database"
 )
 
 func main() {
@@ -24,7 +24,7 @@ func main() {
 		CampaignService: &campaignService,
 	}
 	r.Post("/campaigns", endpoints.HandlerError(handler.CampaignPost))
-	r.Get("/campaigns", endpoints.HandlerError(handler.CampaignGet))
+	r.Get("/campaigns/{id}", endpoints.HandlerError(handler.CampaignFindById))
 
 	http.ListenAndServe(":3333", r)
 }

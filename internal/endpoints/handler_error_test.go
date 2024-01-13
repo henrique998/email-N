@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	internalerrors "github.com/henrique1501/email-N/internal/internalErrors"
+	internalerrors "github.com/henrique998/email-N/internal/internalErrors"
 	"github.com/stretchr/testify/assert"
 )
 

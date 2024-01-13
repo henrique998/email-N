@@ -3,8 +3,14 @@ package campaing
 import (
 	"time"
 
-	internalerrors "github.com/henrique1501/email-N/internal/internalErrors"
+	internalerrors "github.com/henrique998/email-N/internal/internalErrors"
 	"github.com/rs/xid"
+)
+
+const (
+	Pending = "Pending"
+	Started = "Started"
+	Done    = "Done"
 )
 
 type Contact struct {
@@ -17,6 +23,7 @@ type Campaing struct {
 	Content   string    `validate:"min=5,max=1024" json:"content"`
 	Contacts  []Contact `validate:"min=1,dive" json:"contacts"`
 	CreatedAt time.Time `validate:"required" json:"createdAt"`
+	Status    string
 }
 
 func NewCampaing(name, content string, emails []string) (*Campaing, error) {
@@ -32,6 +39,7 @@ func NewCampaing(name, content string, emails []string) (*Campaing, error) {
 		Content:   content,
 		Contacts:  contacts,
 		CreatedAt: time.Now(),
+		Status:    Pending,
 	}
 
 	err := internalerrors.ValidateStruct(campaing)

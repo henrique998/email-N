@@ -1,12 +1,13 @@
 package campaing
 
 import (
-	"github.com/henrique1501/email-N/internal/contracts"
-	internalerrors "github.com/henrique1501/email-N/internal/internalErrors"
+	"github.com/henrique998/email-N/internal/contracts"
+	internalerrors "github.com/henrique998/email-N/internal/internalErrors"
 )
 
 type Service interface {
 	Create(newCampaing contracts.NewCampaingDTO) (string, error)
+	FindById(campaingId string) (*contracts.CampaignResponseDTO, error)
 }
 
 type ServiceImp struct {
@@ -25,4 +26,18 @@ func (s *ServiceImp) Create(newCampaing contracts.NewCampaingDTO) (string, error
 	}
 
 	return campaing.ID, nil
+}
+
+func (s *ServiceImp) FindById(campaingId string) (*contracts.CampaignResponseDTO, error) {
+	campaign, err := s.Repo.GetById(campaingId)
+	if err != nil {
+		return nil, internalerrors.ErrInternal
+	}
+
+	return &contracts.CampaignResponseDTO{
+		ID:      campaign.ID,
+		Name:    campaign.Name,
+		Content: campaign.Content,
+		Status:  campaign.Status,
+	}, nil
 }
