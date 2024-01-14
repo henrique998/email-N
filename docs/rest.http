@@ -1,11 +1,15 @@
 POST https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns
 
 {
-  "name": "cam",
-  "content": "campaign 03 description",
+  "name": "change",
+  "content": "campaign change",
   "emails": ["jhondoe@gmail.com", "henrique@gmail.com"]
 }
 
 ###
 
-GET https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns
+GET https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/cmi3i0fpocerickrunag
+
+### 
+
+PATCH https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/cancel/cmi3i0fpocerickrunag

@@ -34,6 +34,11 @@ func (r *repositoryMock) GetById(campaingId string) (*Campaing, error) {
 	return args.Get(0).(*Campaing), nil
 }
 
+func (r *repositoryMock) Cancel(campaignId string) error {
+
+	return nil
+}
+
 var (
 	newCampaing = contracts.NewCampaingDTO{
 		Name:    "Test Y",

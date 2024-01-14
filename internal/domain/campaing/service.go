@@ -1,6 +1,8 @@
 package campaing
 
 import (
+	"errors"
+
 	"github.com/henrique998/email-N/internal/contracts"
 	internalerrors "github.com/henrique998/email-N/internal/internalErrors"
 )
@@ -8,6 +10,7 @@ import (
 type Service interface {
 	Create(newCampaing contracts.NewCampaingDTO) (string, error)
 	FindById(campaingId string) (*contracts.CampaignResponseDTO, error)
+	Cancel(campaingId string) error
 }
 
 type ServiceImp struct {
@@ -40,4 +43,24 @@ func (s *ServiceImp) FindById(campaingId string) (*contracts.CampaignResponseDTO
 		Content: campaign.Content,
 		Status:  campaign.Status,
 	}, nil
+}
+
+func (s *ServiceImp) Cancel(campaingId string) error {
+	campaign, err := s.Repo.GetById(campaingId)
+	if err != nil {
+		return internalerrors.ErrInternal
+	}
+
+	if campaign.Status != Pending {
+		return errors.New("Campaign status invalid")
+	}
+
+	campaign.Cancel()
+
+	err = s.Repo.Save(campaign)
+	if err != nil {
+		return internalerrors.ErrInternal
+	}
+
+	return nil
 }

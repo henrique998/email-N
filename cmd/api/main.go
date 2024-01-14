@@ -17,14 +17,16 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
+	db := database.NewDb()
 	campaignService := campaing.ServiceImp{
-		Repo: &database.CampaignRepository{},
+		Repo: &database.CampaignRepository{Db: db},
 	}
 	handler := endpoints.Handler{
 		CampaignService: &campaignService,
 	}
 	r.Post("/campaigns", endpoints.HandlerError(handler.CampaignPost))
 	r.Get("/campaigns/{id}", endpoints.HandlerError(handler.CampaignFindById))
+	r.Patch("/campaigns/cancel/{id}", endpoints.HandlerError(handler.CampaignsCancelPatch))
 
 	http.ListenAndServe(":3333", r)
 }
