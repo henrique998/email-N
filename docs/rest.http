@@ -3,13 +3,17 @@ POST https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns
 {
   "name": "change",
   "content": "campaign change",
-  "emails": ["jhondoe@gmail.com", "henrique@gmail.com"]
+  "emails": ["jhondoe2@gmail.com", "henrique3@gmail.com"]
 }
 
 ###
 
-GET https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/cmi3i0fpocerickrunag
+GET https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/cmjc8fnpoceqs5503ms0
 
 ### 
 
-PATCH https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/cancel/cmi3i0fpocerickrunag
+PATCH https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/cancel/cmjbr3fpocepedtkomrg
+
+### 
+
+DELETE https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/delete/cmjc8fnpoceqs5503ms0

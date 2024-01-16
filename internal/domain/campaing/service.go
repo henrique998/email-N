@@ -11,6 +11,7 @@ type Service interface {
 	Create(newCampaing contracts.NewCampaingDTO) (string, error)
 	FindById(campaingId string) (*contracts.CampaignResponseDTO, error)
 	Cancel(campaingId string) error
+	Delete(campaingId string) error
 }
 
 type ServiceImp struct {
@@ -23,7 +24,7 @@ func (s *ServiceImp) Create(newCampaing contracts.NewCampaingDTO) (string, error
 		return "", err
 	}
 
-	err = s.Repo.Save(campaing)
+	err = s.Repo.Create(campaing)
 	if err != nil {
 		return "", internalerrors.ErrInternal
 	}
@@ -38,10 +39,11 @@ func (s *ServiceImp) FindById(campaingId string) (*contracts.CampaignResponseDTO
 	}
 
 	return &contracts.CampaignResponseDTO{
-		ID:      campaign.ID,
-		Name:    campaign.Name,
-		Content: campaign.Content,
-		Status:  campaign.Status,
+		ID:            campaign.ID,
+		Name:          campaign.Name,
+		Content:       campaign.Content,
+		Status:        campaign.Status,
+		AmoutOfEmails: len(campaign.Contacts),
 	}, nil
 }
 
@@ -57,7 +59,27 @@ func (s *ServiceImp) Cancel(campaingId string) error {
 
 	campaign.Cancel()
 
-	err = s.Repo.Save(campaign)
+	err = s.Repo.Update(campaign)
+	if err != nil {
+		return internalerrors.ErrInternal
+	}
+
+	return nil
+}
+
+func (s *ServiceImp) Delete(campaingId string) error {
+	campaign, err := s.Repo.GetById(campaingId)
+	if err != nil {
+		return internalerrors.ErrInternal
+	}
+
+	if campaign.Status != Pending {
+		return errors.New("Campaign status invalid")
+	}
+
+	campaign.Delete()
+
+	err = s.Repo.Delete(campaign)
 	if err != nil {
 		return internalerrors.ErrInternal
 	}

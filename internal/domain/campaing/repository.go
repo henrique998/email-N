@@ -1,7 +1,9 @@
 package campaing
 
 type Repository interface {
-	Save(campaing *Campaing) error
+	Create(campaing *Campaing) error
+	Update(campaing *Campaing) error
 	Get() ([]Campaing, error)
 	GetById(campaignId string) (*Campaing, error)
+	Delete(campaing *Campaing) error
 }
