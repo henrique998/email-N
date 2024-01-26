@@ -8,12 +8,12 @@ POST https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns
 
 ###
 
-GET https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/cmjc8fnpoceqs5503ms0
+GET https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/cmkpmpnpoceq36mo3vtg
 
 ### 
 
-PATCH https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/cancel/cmjbr3fpocepedtkomrg
+PATCH https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/cancel/cmjbr3fpocjjjdtkomrg
 
 ### 
 
-DELETE https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/delete/cmjc8fnpoceqs5503ms0
+DELETE https://3333-henrique998-emailn-jko5ydl6d4i.ws-us107.gitpod.io/campaigns/delete/cmkpmpnpoceq36mo3vtg

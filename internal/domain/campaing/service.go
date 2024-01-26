@@ -10,7 +10,6 @@ import (
 type Service interface {
 	Create(newCampaing contracts.NewCampaingDTO) (string, error)
 	FindById(campaingId string) (*contracts.CampaignResponseDTO, error)
-	Cancel(campaingId string) error
 	Delete(campaingId string) error
 }
 
@@ -35,7 +34,7 @@ func (s *ServiceImp) Create(newCampaing contracts.NewCampaingDTO) (string, error
 func (s *ServiceImp) FindById(campaingId string) (*contracts.CampaignResponseDTO, error) {
 	campaign, err := s.Repo.GetById(campaingId)
 	if err != nil {
-		return nil, internalerrors.ErrInternal
+		return nil, internalerrors.ProcessErrorToReturn(err)
 	}
 
 	return &contracts.CampaignResponseDTO{
@@ -47,30 +46,10 @@ func (s *ServiceImp) FindById(campaingId string) (*contracts.CampaignResponseDTO
 	}, nil
 }
 
-func (s *ServiceImp) Cancel(campaingId string) error {
-	campaign, err := s.Repo.GetById(campaingId)
-	if err != nil {
-		return internalerrors.ErrInternal
-	}
-
-	if campaign.Status != Pending {
-		return errors.New("Campaign status invalid")
-	}
-
-	campaign.Cancel()
-
-	err = s.Repo.Update(campaign)
-	if err != nil {
-		return internalerrors.ErrInternal
-	}
-
-	return nil
-}
-
 func (s *ServiceImp) Delete(campaingId string) error {
 	campaign, err := s.Repo.GetById(campaingId)
 	if err != nil {
-		return internalerrors.ErrInternal
+		return internalerrors.ProcessErrorToReturn(err)
 	}
 
 	if campaign.Status != Pending {
